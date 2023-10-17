@@ -1,4 +1,5 @@
 import gymnasium as gym
 
-env = gym.make("LunarLander-v2", render_mode="human")
-observation, info = env.reset()
+class LUNARLANDER_agent():
+    def __init__(self):
+        self.env = gym.make("LunarLander-v2", render_mode="human")

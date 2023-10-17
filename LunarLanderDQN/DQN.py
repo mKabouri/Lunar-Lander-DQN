@@ -1,3 +1,6 @@
+import config
+import network
+
 import numpy as np
 from collections import namedtuple, deque
 
@@ -5,7 +8,7 @@ Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'
 
 class ReplayMemory(object):
     """
-    Inspired from:
+    Taken from:
     https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html#replay-memory
 
     And it remainds me Linus Torvalds quote:
@@ -29,3 +32,6 @@ class DQN():
         self.nb_outputs = nb_outputs
 
         self.replay_memory = ReplayMemory(capacity=memory_replay_capacity)
+
+    def train(self):
+        pass

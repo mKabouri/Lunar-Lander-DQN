@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.functional as F
 
 class Network(nn.Module):
-    def __init__(self):
+    def __init__(self, nb_observations, nb_actions):
         super().__init__()
 
     def forward(self, input):
