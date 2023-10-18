@@ -1,3 +1,5 @@
+import config
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -6,9 +8,11 @@ class Network(nn.Module):
     def __init__(self, nb_observations, nb_actions):
         super().__init__()
         self.DQN_network = nn.Sequential([
-            F.relu(nn.Linear(nb_observations, 128)),  
-            F.relu(nn.Linear(128, 128)),
-            F.relu(nn.Linear(128, nb_actions))
+            nn.Linear(nb_observations, 128),  
+            F.relu(),
+            nn.Linear(128, 128),
+            F.relu(),
+            nn.Linear(128, nb_actions)
         ])
 
     def forward(self, input):
