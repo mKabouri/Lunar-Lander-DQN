@@ -1,10 +1,11 @@
-import config
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 class Network(nn.Module):
+    """
+    Our Brain
+    """
     def __init__(self, nb_observations, nb_actions):
         super().__init__()
         self.DQN_network = nn.Sequential([
