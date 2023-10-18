@@ -1,37 +1,29 @@
 import config
 import network
+import memoryReplay
 
-import numpy as np
-from collections import namedtuple, deque
-
-Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'))
-
-class ReplayMemory(object):
-    """
-    Taken from:
-    https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html#replay-memory
-
-    And it remainds me Linus Torvalds quote:
-    "Bad programmers worry about the code. Good programmers worry about data structures and their relationships."
-    """
-    def __init__(self, capacity):
-        self.memory = deque([], maxlen=capacity)
-
-    def push(self, *args):
-        """Save a transition"""
-        self.memory.append(Transition(*args))
-
-    def sample(self, batch_size):
-        return np.random.sample(self.memory, batch_size)
-
-    def __len__(self):
-        return len(self.memory)
+import gymnasium as gym
 
 class DQN():
-    def __init__(self, nb_outputs, memory_replay_capacity):
+    def __init__(self, nb_outputs, memory_replay_capacity=config.MEMORY_REPLAY_CAPACITY):
+        """
+        
+        """
         self.nb_outputs = nb_outputs
+        self.env = gym.make("LunarLander-v2", render_mode="human")
+        observation, info = self.env.reset()
 
-        self.replay_memory = ReplayMemory(capacity=memory_replay_capacity)
+        self.replay_memory = memoryReplay.ReplayMemory(capacity=memory_replay_capacity)
+        self.policy_network = network.PolicyNetwork(nb_observations=len(observation), nb_actions=self.env.action_space.n)
+
+    def select_action(self):
+        pass
 
     def train(self):
+        pass
+
+    def save_weights(self):
+        pass
+
+    def produce_plot(self):
         pass
