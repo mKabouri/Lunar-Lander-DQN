@@ -8,16 +8,18 @@ class PolicyNetwork(nn.Module):
     """
     def __init__(self, nb_observations, nb_actions):
         super().__init__()
-        self.DQN_network = nn.Sequential([
-            nn.Linear(nb_observations, 128),  
-            F.relu(),
-            nn.Linear(128, 128),
-            F.relu(),
-            nn.Linear(128, nb_actions)
-        ])
+        self.layer1 = nn.Linear(nb_observations, 256)
+        self.layer2 = nn.Linear(256, 256)
+        self.layer3 = nn.Linear(256, 128)
+        self.layer4 = nn.Linear(128, nb_actions)
 
-    def forward(self, input):
-        return self.DQN_network(input)
+    # Called with either one element to determine next action, or a batch
+    # during optimization. Returns tensor([[left0exp,right0exp]...]).
+    def forward(self, x):
+        x = F.relu(self.layer1(x))
+        x = F.relu(self.layer2(x))
+        x = F.relu(self.layer3(x))
+        return self.layer4(x)
 
 
 if __name__ == '__main__':
